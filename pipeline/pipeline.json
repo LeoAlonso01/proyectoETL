@@ -1,0 +1,63 @@
+[
+  {
+    "$lookup": {
+      "from": "declaracion100",
+      "localField": "idUsrDecnet",
+      "foreignField": "encabezado.usuario.idUsuario",
+      "as": "declaracion"
+    }
+  },
+  {
+    "$unwind": {
+      "path": "$declaracion",
+      "preserveNullAndEmptyArrays": false
+    }
+  },
+  {
+    "$addFields": {
+      "mes": {
+        "$dateToString": {
+          "format": "%Y-%m",
+          "date": {
+            "$toDate": "$declaracion.encabezado.fechaActualizacion"
+          }
+        }
+      }
+    }
+  },
+  {
+    "$match": {
+      "mes": {
+        "$in": [
+          "2023-03"
+        ]
+      }
+    }
+  },
+  {
+    "$sort": {
+      "rfc": 1
+    }
+  },
+  {
+    "$project": {
+      "declaracion.encabezado.tipoDeclaracion": 1,
+      "nombre": 1,
+      "declaracion._id": 1,
+      "declaracion.declaracion.datosEmpleoCargoComision.empleoCargoComision.areaAdscripcion": 1,
+      "declaracion.declaracion.datosEmpleoCargoComision.empleoCargoComision.empleoCargoComision": 1,
+      "declaracion.declaracion.datosEmpleoCargoComision.empleoCargoComision.fechaEncargo": 1,
+      "declaracion.declaracion.inversionesCuentasValores.ninguno": 1,
+      "declaracion.declaracion.bienesInmuebles.ninguno": 1,
+      "declaracion.declaracion.vehiculos.ninguno": 1,
+      "declaracion.declaracion.bienesInmuebles.bienesInmuebles.domicilio.domicilioExtranjero": 1,
+      "declaracion.declaracion.bienesInmuebles.bienesInmuebles.transmisores.tipoPersona": 1,
+      "declaracion.declaracion.ingresos.ingresoNetoParejaDependiente.remuneracion.monto": 1,
+      "declaracion.declaracion.ingresos.otrosIngresosTotal.monto": 1,
+      "declaracion.declaracion.datosDependientesEconomicos.ninguno": 1,
+      "declaracion.declaracion.datosCurricularesDeclarante.escolaridad.nivel.valor": 1,
+      "declaracion.encabezado.fechaActualizacion": 1,
+      "declaracion.encabezado.anio": 1
+    }
+  }
+]

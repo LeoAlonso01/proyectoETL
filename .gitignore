@@ -1,0 +1,22 @@
+# env
+.env
+*.env
+
+# outputs
+output/
+**/__pycache__/
+*.pyc
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# logs
+*.log
+
+# virtual environments
+venv/
+
+
+venv/
