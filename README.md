@@ -23,6 +23,14 @@ This project automates:
 
 > Note: `docx2pdf` usually requires Windows + Microsoft Word installed.
 
+## Highlights
+- Processes nested MongoDB documents using an Aggregation Pipeline
+- Flattens JSON structures into tabular datasets
+- Applies business rules for public disclosure (YES/NO masking)
+- Generates public-ready DOCX and PDF reports from templates
+- Output is organized by execution date for auditing
+
+
 ## Setup
 ```bash
 python -m venv .venv
@@ -31,4 +39,20 @@ python -m venv .venv
 pip install -r requirements.txt
 copy .env.example .env
 # Edit .env with your Mongo credentials
+python -m app.main --all
+
+## Setup (Windows)
+
+### PowerShell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+copy .env.example .env
+python -m app.main --all
+
+### CMD
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
 python -m app.main --all
